@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
     <title>Upload Item</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <h1>Upload your Item to Sell</h1>

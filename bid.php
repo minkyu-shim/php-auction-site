@@ -59,6 +59,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <title>Place a Bid</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <h1><?php echo htmlspecialchars($item['title']); ?></h1>
