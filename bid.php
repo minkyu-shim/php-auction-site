@@ -60,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <title>Place a Bid</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bid_style.css">
 </head>
 <body>
 <h1><?php echo htmlspecialchars($item['title']); ?></h1>
@@ -78,9 +78,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <label>Your Bid:</label><br>
     <input type="number" name="bid_amount" step="0.01" required><br><br>
     <button type="submit">Place Bid</button>
+    <!--Git Branch Feature Add Winning Status-->
+    <?php include 'features/winning_status.php'; ?>
 </form>
-<!--Git Branch Feature Add Winning Status-->
-<?php include 'features/winning_status.php'; ?>
 
 <!-- Git Branch Feature Add Bidding History -->
 <?php include 'features/bidding_history.php'; ?>

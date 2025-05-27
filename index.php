@@ -8,7 +8,7 @@ include "db.php";
 <head>
     <meta charset="UTF-8">
     <title>Auction Homepage</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/index_style.css">
 </head>
 <body>
 

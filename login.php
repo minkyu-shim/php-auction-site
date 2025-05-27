@@ -9,7 +9,7 @@ include "features/login_auth.php"; // checks user login info
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login_style.css">
 </head>
 <body>
 <h2>Login</h2>

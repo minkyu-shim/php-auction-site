@@ -1,0 +1,71 @@
+/* Reset some default browser styles */
+body, h1, h2, p, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Header styles */
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 30px;
+    color: #444;
+}
+
+/* User greeting and links */
+p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Item card styles */
+.item-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.item-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.item-card h3 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.item-card p {
+    color: #555;
+    font-size: 14px;
+}
