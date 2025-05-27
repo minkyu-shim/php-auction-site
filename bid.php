@@ -71,6 +71,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 
+<p><strong>Auction ends at:</strong> <?php echo $item['end_time']; ?></p>
+<p id="countdown" style="font-weight: bold;"></p>
+
 <form method="post">
     <label>Your Bid:</label><br>
     <input type="number" name="bid_amount" step="0.01" required><br><br>
@@ -83,6 +86,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php include 'features/bidding_history.php'; ?>
 
 <p><a href="index.php">Back to Home</a></p>
+
 </body>
 </html>
 
