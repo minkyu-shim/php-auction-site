@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "db.php"; // connecting to db.php for db access (require)
-include "features/login_auth.php";
+include "features/login_auth.php"; // checks user login info
 ?>
 
 <!DOCTYPE html>
