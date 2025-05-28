@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db.php";
+include '../includes/db.php';
 
 // Check if the user is logged in, if not send to login.php
 if (!isset($_SESSION['user_id'])) {
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
     <title>Upload Item</title>
-    <link rel="stylesheet" href="/css/upload_item_style.css">
+    <link rel="stylesheet" href="/public/css/upload_item_style.css">
 </head>
 <body>
 <h1>Upload your Item to Sell</h1>

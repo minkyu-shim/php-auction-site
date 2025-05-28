@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db.php";
+include '../includes/db.php';
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +8,7 @@ include "db.php";
 <head>
     <meta charset="UTF-8">
     <title>Auction Homepage</title>
-    <link rel="stylesheet" href="/css/index_style.css">
+    <link rel="stylesheet" href="/public/css/index_style.css">
 </head>
 <body>
 

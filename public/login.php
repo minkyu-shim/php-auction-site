@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "db.php"; // connecting to db.php for db access (require)
-include "features/login_auth.php"; // checks user login info
+include '../includes/db.php'; // connecting to db.php for db access (require)
+include "../features/login_auth.php"; // checks user login info
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ include "features/login_auth.php"; // checks user login info
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/css/login_style.css">
+    <link rel="stylesheet" href="/public/css/login_style.css">
 </head>
 <body>
 <h2>Login</h2>
