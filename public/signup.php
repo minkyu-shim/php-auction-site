@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php';
+include '../includes/db.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $user_name = $_POST['user_name'];
@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/css/signup_style.css">
+    <link rel="stylesheet" href="/public/css/signup_style.css">
 </head>
 <body>
 <h2>Signup</h2>

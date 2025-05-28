@@ -13,10 +13,36 @@ body {
     text-align: center;
 }
 
-/* Header styles */
+/* Welcome header */
 h1 {
-    color: #333;
+    font-size: 32px;
+    color: #2c3e50;
     margin-bottom: 10px;
+}
+
+/* Greeting or auth message container */
+.auth-message {
+    display: inline-block;
+    background-color: #eaf2f8;
+    padding: 15px 20px;
+    border: 1px solid #d6eaf8;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 16px;
+    color: #34495e;
+    margin-bottom: 20px;
+}
+
+/* Auth links */
+.auth-message a {
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 8px;
+}
+
+.auth-message a:hover {
+    text-decoration: underline;
 }
 
 h2 {

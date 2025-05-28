@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db.php";
+include '../includes/db.php';
 
 // Check user is logged in to bid
 if(!isset($_SESSION['user_id'])) {
@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bid_amount = $_POST['bid_amount'];
 
     if ($bid_amount <= $item['current_price']) {
-        echo "Bid amount must be higher than current price";
+        echo "<script> alert('Bid amount must be higher than current price') </script>";
     } else {
         // Insert the new info to bid table
         $insert_bid_sql = "insert into bids (item_id, user_id, bid_amount) values (?, ?, ?)";
@@ -60,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <title>Place a Bid</title>
-    <link rel="stylesheet" href="/css/bid_style.css">
+    <link rel="stylesheet" href="/public/css/bid_style.css">
 </head>
 <body>
 <h1><?php echo htmlspecialchars($item['title']); ?></h1>
@@ -79,14 +79,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input type="number" name="bid_amount" step="0.01" required><br><br>
     <button type="submit">Place Bid</button>
     <!--Git Branch Feature Add Winning Status-->
-    <?php include 'features/winning_status.php'; ?>
+    <?php include '../features/winning_status.php'; ?>
 </form>
 
 <!-- Git Branch Feature Add Bidding History -->
-<?php include 'features/bidding_history.php'; ?>
+<?php include '../features/bidding_history.php'; ?>
 
 <p><a href="index.php">Back to Home</a></p>
 
 </body>
 </html>
-
