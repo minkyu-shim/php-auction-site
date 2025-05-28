@@ -16,15 +16,16 @@ include '../includes/db.php';
 
 <!--The if statement below is written by ChatGPT-->
 <!--It checks if the user is logged in or not. And displays the appropriate message.-->
-<?php if (isset($_SESSION['user_name'])): ?>
-    <p>
-        Good to see you again, <?php echo $_SESSION['user_name']; ?> <br>
+<div class="auth-message">
+    <?php if (isset($_SESSION['user_name'])): ?>
+        <strong>Good to see you again, <?php echo $_SESSION['user_name']; ?>! </strong> <br>
         <a href="upload_item.php">Upload Item</a> |
         <a href="logout.php">Logout</a>
-    </p>
-<?php else: ?>
-    <p><a href="login.php">Login</a> | <a href="signup.php">Sign Up</a></p>
-<?php endif; ?>
+    <?php else: ?>
+        <a href="login.php">Login</a> |
+        <a href="signup.php">Sign Up</a>
+    <?php endif; ?>
+</div>
 
 
 <h2>All Auction Items</h2>
