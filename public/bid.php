@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bid_amount = $_POST['bid_amount'];
 
     if ($bid_amount <= $item['current_price']) {
-        echo "Bid amount must be higher than current price";
+        echo "<script> alert('Bid amount must be higher than current price') </script>";
     } else {
         // Insert the new info to bid table
         $insert_bid_sql = "insert into bids (item_id, user_id, bid_amount) values (?, ?, ?)";
