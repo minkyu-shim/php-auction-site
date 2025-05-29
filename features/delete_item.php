@@ -11,13 +11,13 @@ if (isset($_GET['id'])) {
     $item_id = $_GET['id'];
     $user_id = $_SESSION['user_id'];
 
-    // Only allow deleting items owned by the user
+    // Only allow deleting items owned by user
     $sql = "DELETE FROM items WHERE id = ? AND user_id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "ii", $item_id, $user_id);
 
     if (mysqli_stmt_execute($stmt)) {
-        // Optional: success message could be set in session
+        echo "<script>alert('Item deleted successfully');</script>";
     }
 }
 
