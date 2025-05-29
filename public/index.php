@@ -20,6 +20,7 @@ include '../includes/db.php';
     <?php if (isset($_SESSION['user_name'])): ?>
         <strong>Good to see you again, <?php echo $_SESSION['user_name']; ?>! </strong> <br>
         <a href="upload_item.php">Upload Item</a> |
+        <a href="my_items.php">My Items</a> |
         <a href="logout.php">Logout</a>
     <?php else: ?>
         <a href="login.php">Login</a> |
