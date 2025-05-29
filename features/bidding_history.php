@@ -1,7 +1,6 @@
 <?php
-// bidding_history.php
-// expects $conn and $item_id in scope
 
+// ChatGPT wrote this sql query
 $history_sql = "
   SELECT b.bid_amount, b.bid_time, u.user_name
     FROM bids AS b
