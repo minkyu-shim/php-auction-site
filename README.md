@@ -7,11 +7,21 @@ A simple auction website built using PHP, MySQL, HTML, CSS, and JavaScript.
 - User registration and login
 - User authentication with sessions
 - Upload items for auction (image via URL)
+- Delete the user's item from the bid
 - View auction listings
 - Place bids on items
 - View bid history
 - Show winning status for each user
 - Logout functionality
+
+## Development Workflow
+
+This project uses Git with a `main` and `develop` branch structure:
+
+- Code is committed to `develop` during feature development
+- Once tested, changes are merged into `main`
+- To practice the workflow commonly used among professionals
+
 
 ## Technologies Used
 
@@ -45,6 +55,7 @@ A simple auction website built using PHP, MySQL, HTML, CSS, and JavaScript.
 3. Start Apache and MySQL from XAMPP Control Panel.
 4. Import the `auction_db` SQL schema (if provided) into phpMyAdmin.
 5. Open your browser and go to: http://localhost/your-folder-name
-6. You can test with this sample user:
+6. You can create your own account to check out the website
+7. Also, you can test with these sample users:
 - **Email:** user@epita.fr, minkyu.shim@epita.fr
 - **Password:** tristan, 1234
