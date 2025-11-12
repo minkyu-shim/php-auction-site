@@ -18,12 +18,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Check Password
             // Check variable name, $password is also used in db.php for db connection, if not working change
             if(password_verify($password, $user['password'])){
-                // verified
-                $_SESSION['user_id'] = $user['user_id'];
-                $_SESSION['user_name'] = $user['user_name'];
-                $_SESSION['email'] = $user['email'];
-                header("Location: index.php");
-                exit;
+                // Check if email is verified
+                if($user['email_verified'] == 0){
+                    $error = "Please verify your email before logging in. Check your inbox for the verification link. <a href='resend_verification.php'>Resend verification email</a>";
+                } else {
+                    // verified
+                    $_SESSION['user_id'] = $user['user_id'];
+                    $_SESSION['user_name'] = $user['user_name'];
+                    $_SESSION['email'] = $user['email'];
+                    header("Location: index.php");
+                    exit;
+                }
             } else {
                 $error = "Invalid Password";
             }

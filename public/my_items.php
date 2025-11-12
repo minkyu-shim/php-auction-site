@@ -1,11 +1,15 @@
 <?php
 session_start();
 include '../includes/db.php';
+include '../includes/verification_check.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
+
+// Check if email is verified
+checkEmailVerification($conn);
 
 $user_id = $_SESSION['user_id'];
 

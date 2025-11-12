@@ -1,12 +1,16 @@
 <?php
 session_start();
 include '../includes/db.php';
+include '../includes/verification_check.php';
 
 // Check if the user is logged in, if not send to login.php
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
+
+// Check if email is verified
+checkEmailVerification($conn);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];

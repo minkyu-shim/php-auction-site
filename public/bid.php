@@ -1,12 +1,16 @@
 <?php
 session_start();
 include '../includes/db.php';
+include '../includes/verification_check.php';
 
 // Check user is logged in to bid
 if(!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
+
+// Check if email is verified
+checkEmailVerification($conn);
 
 // Check the item ID
 if(!isset($_GET['item_id'])) {

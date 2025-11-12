@@ -14,7 +14,7 @@ include "../features/login_auth.php"; // checks user login info
 <body>
 <h2>Login</h2>
 
-<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+<?php if (isset($error)) echo "<p style='color:red;'>" . $error . "</p>"; ?>
 
 <form method="post" action="">
     <label for="email">Email:</label><br>
