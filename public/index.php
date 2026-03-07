@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../includes/db.php';
+require_once __DIR__ . '/../includes/db.php';
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +8,7 @@ include '../includes/db.php';
 <head>
     <meta charset="UTF-8">
     <title>Auction Homepage</title>
-    <link rel="stylesheet" href="/public/css/index_style.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/index_style.css'); ?>">
 </head>
 <body>
 
@@ -18,13 +18,13 @@ include '../includes/db.php';
 <!--It checks if the user is logged in or not. And displays the appropriate message.-->
 <div class="auth-message">
     <?php if (isset($_SESSION['user_name'])): ?>
-        <strong>Good to see you again, <?php echo $_SESSION['user_name']; ?>! </strong> <br>
-        <a href="upload_item.php">Upload Item</a> |
-        <a href="my_items.php">My Items</a> |
-        <a href="logout.php">Logout</a>
+        <strong>Good to see you again, <?php echo htmlspecialchars($_SESSION['user_name']); ?>! </strong> <br>
+        <a href="<?php echo appUrl('upload_item.php'); ?>">Upload Item</a> |
+        <a href="<?php echo appUrl('my_items.php'); ?>">My Items</a> |
+        <a href="<?php echo appUrl('logout.php'); ?>">Logout</a>
     <?php else: ?>
-        <a href="login.php">Login</a> |
-        <a href="signup.php">Sign Up</a>
+        <a href="<?php echo appUrl('login.php'); ?>">Login</a> |
+        <a href="<?php echo appUrl('signup.php'); ?>">Sign Up</a>
     <?php endif; ?>
 </div>
 
@@ -42,7 +42,7 @@ if (mysqli_num_rows($result) > 0) {
         echo "<p><img src='" . htmlspecialchars($row['image_url']) . "'></p>";
         echo "<p>" . htmlspecialchars($row['description']) . "</p>";
         echo "<p><strong>Current Price:</strong> $" . $row['current_price'] . "</p>";
-        echo "<p><a href='bid.php?item_id=" . $row['id'] . "'>Place a Bid</a></p>";
+        echo "<p><a href='" . appUrl('bid.php?item_id=' . urlencode((string) $row['id'])) . "'>Place a Bid</a></p>";
         echo "</div>";
     }
 } else {

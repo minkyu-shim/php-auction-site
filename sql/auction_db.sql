@@ -84,6 +84,9 @@ CREATE TABLE `users` (
   `user_name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `email_verified` tinyint(1) NOT NULL DEFAULT 0,
+  `verification_token` varchar(64) DEFAULT NULL,
+  `token_created_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -91,10 +94,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `email`, `password`, `created_at`) VALUES
-(1, 'admin', 'admin@auction.com', 'password', '2025-05-26 12:16:58'),
-(2, 'Minkie', 'minkyu.shim@epita.fr', '$2y$10$WDH132v6VldOdB6IRP4kWe0K9JU5ZV3mUxfSjzKgKWspI6Su9rifq', '2025-05-26 13:40:40'),
-(3, 'tristan', 'user@epita.fr', '$2y$10$qT3u.FvnoO9q6FTj3a1OXui5z/rkRcFYwwEjjbKFRAKl7F3IMyv4O', '2025-05-27 11:11:36');
+INSERT INTO `users` (`user_id`, `user_name`, `email`, `password`, `email_verified`, `verification_token`, `token_created_at`, `created_at`) VALUES
+(1, 'admin', 'admin@auction.com', 'password', 1, NULL, NULL, '2025-05-26 12:16:58'),
+(2, 'Minkie', 'minkyu.shim@epita.fr', '$2y$10$WDH132v6VldOdB6IRP4kWe0K9JU5ZV3mUxfSjzKgKWspI6Su9rifq', 1, NULL, NULL, '2025-05-26 13:40:40'),
+(3, 'tristan', 'user@epita.fr', '$2y$10$qT3u.FvnoO9q6FTj3a1OXui5z/rkRcFYwwEjjbKFRAKl7F3IMyv4O', 1, NULL, NULL, '2025-05-27 11:11:36');
 
 --
 -- Indexes for dumped tables

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../includes/db.php';
-include '../includes/email_helper.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/email_helper.php';
 
 $resend_success = false;
 $error = "";
@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resend Verification Email</title>
-    <link rel="stylesheet" href="/public/css/login_style.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/login_style.css'); ?>">
     <style>
         .success-message {
             background-color: #d4edda;
@@ -87,8 +87,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <p>If an account exists with that email, a verification link has been sent.</p>
         <p>Please check your inbox and click the verification link to activate your account.</p>
         <p><strong>Note:</strong> The verification link will expire in 24 hours.</p>
+        <?php if ((getenv('MAIL_DELIVERY') ?: 'mail') === 'log'): ?>
+            <p>Local development mode is writing verification messages to <code>storage/mail/</code>.</p>
+        <?php endif; ?>
     </div>
-    <p><a href="login.php">Back to Login</a> | <a href="index.php">Go to Homepage</a></p>
+    <p><a href="<?php echo appUrl('login.php'); ?>">Back to Login</a> | <a href="<?php echo appUrl('index.php'); ?>">Go to Homepage</a></p>
 <?php else: ?>
     <div class="info-box">
         <p>Enter your email address to receive a new verification link.</p>
@@ -103,7 +106,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <button type="submit">Resend Verification Email</button>
     </form>
 
-    <p><a href="login.php">Back to Login</a> | <a href="signup.php">Create New Account</a></p>
+    <p><a href="<?php echo appUrl('login.php'); ?>">Back to Login</a> | <a href="<?php echo appUrl('signup.php'); ?>">Create New Account</a></p>
 <?php endif; ?>
 </body>
 </html>

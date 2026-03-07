@@ -50,11 +50,17 @@ The script will:
 
 ## 📧 Email Configuration
 
-### For Local Development (XAMPP)
+### For Local Development
 
-By default, PHP's `mail()` function won't work on XAMPP without configuration. You have two options:
+The project now supports a mail-log mode for development. When `MAIL_DELIVERY=log` is set, verification emails are written to `storage/mail/` instead of being sent over SMTP.
 
-#### Option 1: Configure XAMPP Sendmail (Recommended for Testing)
+The provided `docker-compose.yml` uses this mode by default, so no extra mail setup is required for local testing.
+
+### Optional: Send Real Emails From XAMPP
+
+If you still want to send real emails from XAMPP, PHP's `mail()` function needs extra configuration:
+
+#### Option 1: Configure XAMPP Sendmail
 
 1. **Edit php.ini** (in `C:\xampp\php\php.ini`):
 ```ini

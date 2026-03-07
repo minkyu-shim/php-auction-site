@@ -1,0 +1,37 @@
+services:
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_DEBUG: "true"
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: auction_db
+      DB_USER: auction_user
+      DB_PASS: auction_pass
+      MAIL_DELIVERY: log
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: auction_db
+      MARIADB_USER: auction_user
+      MARIADB_PASSWORD: auction_pass
+      MARIADB_ROOT_PASSWORD: rootpass
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql/auction_db.sql:/docker-entrypoint-initdb.d/01-auction_db.sql:ro
+
+volumes:
+  db_data:

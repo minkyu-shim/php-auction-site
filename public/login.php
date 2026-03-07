@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../includes/db.php'; // connecting to db.php for db access (require)
-include "../features/login_auth.php"; // checks user login info
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../features/login_auth.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ include "../features/login_auth.php"; // checks user login info
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/public/css/login_style.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/login_style.css'); ?>">
 </head>
 <body>
 <h2>Login</h2>
@@ -26,7 +26,7 @@ include "../features/login_auth.php"; // checks user login info
     <button type="submit">Login</button>
 </form>
 
-<p>Don't have an account? <a href="signup.php">Sign up</a></p>
-<p>Continue without logging in? <a href="index.php">Click here</a></p>
+<p>Don't have an account? <a href="<?php echo appUrl('signup.php'); ?>">Sign up</a></p>
+<p>Continue without logging in? <a href="<?php echo appUrl('index.php'); ?>">Click here</a></p>
 </body>
 </html>

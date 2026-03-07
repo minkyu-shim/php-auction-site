@@ -1,24 +1,44 @@
-const endTime = new Date("<?php echo $item['end_time']; ?>").getTime();
-const countdownEl = document.getElementById("countdown");
-const bidForm = document.querySelector("form");
+function setupBiddingCountdown(endTimeIso) {
+    const countdownEl = document.getElementById("countdown");
+    const bidForm = document.querySelector("form");
 
-function updateCountdown() {
-    const now = new Date().getTime();
-    const diff = endTime - now;
+    if (!countdownEl || !endTimeIso) {
+        return;
+    }
 
-    if (diff <= 0) {
-        countdownEl.innerText = "Auction ended";
-        if (bidForm) {
-            bidForm.querySelector("input[name='bid_amount']").disabled = true;
-            bidForm.querySelector("button[type='submit']").disabled = true;
+    const endTime = new Date(endTimeIso).getTime();
+
+    function updateCountdown() {
+        const now = Date.now();
+        const diff = endTime - now;
+
+        if (diff <= 0) {
+            countdownEl.innerText = "Auction ended";
+
+            if (bidForm) {
+                const amountInput = bidForm.querySelector("input[name='bid_amount']");
+                const submitButton = bidForm.querySelector("button[type='submit']");
+
+                if (amountInput) {
+                    amountInput.disabled = true;
+                }
+
+                if (submitButton) {
+                    submitButton.disabled = true;
+                }
+            }
+
+            clearInterval(timer);
+            return;
         }
-        clearInterval(timer);
-    } else {
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        countdownEl.innerText = `Time left: ${minutes}m ${seconds}s`;
-    }
-}
 
-const timer = setInterval(updateCountdown, 1000);
-updateCountdown(); // run once immediately
+        countdownEl.innerText = `Time left: ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+}

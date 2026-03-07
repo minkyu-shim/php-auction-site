@@ -5,6 +5,8 @@
  * Include this file in pages that require email verification
  */
 
+require_once __DIR__ . '/config.php';
+
 // This function should be called after session_start() and db connection
 function checkEmailVerification($conn) {
     // Check if user is logged in
@@ -23,8 +25,7 @@ function checkEmailVerification($conn) {
                 // User is logged in but email not verified
                 // Clear session and redirect to verification reminder page
                 session_destroy();
-                header("Location: verification_required.php");
-                exit;
+                redirectTo('verification_required.php');
             }
         }
     }

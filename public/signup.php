@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../includes/db.php';
-include '../includes/email_helper.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/email_helper.php';
 
 $signup_success = false;
 
@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="/public/css/signup_style.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/signup_style.css'); ?>">
     <style>
         .success-message {
             background-color: #d4edda;
@@ -79,12 +79,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <?php if ($signup_success): ?>
     <div class="success-message">
         <h3>Registration Successful!</h3>
-        <p>A verification email has been sent to your email address.</p>
+        <p>A verification email has been prepared for your email address.</p>
         <p>Please check your inbox and click the verification link to activate your account.</p>
         <p><strong>Note:</strong> The verification link will expire in 24 hours.</p>
-        <p>Didn't receive the email? <a href="resend_verification.php">Resend verification email</a></p>
+        <?php if ((getenv('MAIL_DELIVERY') ?: 'mail') === 'log'): ?>
+            <p>Local development mode is writing verification messages to <code>storage/mail/</code>.</p>
+        <?php endif; ?>
+        <p>Didn't receive the email? <a href="<?php echo appUrl('resend_verification.php'); ?>">Resend verification email</a></p>
     </div>
-    <p><a href="login.php">Back to Login</a></p>
+    <p><a href="<?php echo appUrl('login.php'); ?>">Back to Login</a></p>
 <?php else: ?>
     <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 
@@ -101,7 +104,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <button type="submit">SignUp</button>
     </form>
 
-    <p>Already have an account? <a href="login.php">Login</a></p>
+    <p>Already have an account? <a href="<?php echo appUrl('login.php'); ?>">Login</a></p>
 <?php endif; ?>
 </body>
 </html>

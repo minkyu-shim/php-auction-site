@@ -1,1 +1,4 @@
 .idea/
+storage/mail/*.html
+storage/mail/*.txt
+!storage/mail/.gitkeep

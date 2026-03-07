@@ -1,0 +1,4 @@
+.git
+.idea
+storage/mail/*.html
+storage/mail/*.txt

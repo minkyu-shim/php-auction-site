@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/config.php';
 
 session_start();
 // clear evey session variables
@@ -7,5 +8,4 @@ session_unset();
 session_destroy();
 
 // Go to login page
-header("Location: index.php");
-exit();
+redirectTo('index.php');

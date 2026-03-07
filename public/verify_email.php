@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../includes/db.php';
-include '../includes/email_helper.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/email_helper.php';
 
 $success = false;
 $error = "";
@@ -130,13 +130,13 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
             <div class="success-icon">✓</div>
             <h1>Email Verified Successfully!</h1>
             <p>Your email has been verified. You can now access all features of the auction site and start bidding on items.</p>
-            <a href="index.php" class="btn">Go to Homepage</a>
-            <a href="bid.php" class="btn btn-secondary">Start Bidding</a>
+            <a href="<?php echo appUrl('index.php'); ?>" class="btn">Go to Homepage</a>
+            <a href="<?php echo appUrl('index.php'); ?>" class="btn btn-secondary">Browse Auctions</a>
         <?php else: ?>
             <div class="error-icon">✗</div>
             <h1>Verification Failed</h1>
             <p><?php echo $error; ?></p>
-            <a href="index.php" class="btn btn-secondary">Go to Homepage</a>
+            <a href="<?php echo appUrl('index.php'); ?>" class="btn btn-secondary">Go to Homepage</a>
         <?php endif; ?>
     </div>
 </body>

@@ -1,11 +1,10 @@
 <?php
 session_start();
-include '../includes/db.php';
-include '../includes/verification_check.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/verification_check.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
+    redirectTo('login.php');
 }
 
 // Check if email is verified
@@ -26,13 +25,13 @@ $result = mysqli_stmt_get_result($stmt);
 <head>
     <meta charset="UTF-8">
     <title>My Items</title>
-    <link rel="stylesheet" href="/public/css/index_style.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/index_style.css'); ?>">
 </head>
 <body>
 
 <h2>My Uploaded Items</h2>
 
-<a href="index.php">← Back to Home</a>
+<a href="<?php echo appUrl('index.php'); ?>">← Back to Home</a>
 <br><br>
 
 <?php if (mysqli_num_rows($result) > 0): ?>
@@ -42,7 +41,7 @@ $result = mysqli_stmt_get_result($stmt);
             <p><img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="" style="max-width:200px;"></p>
             <p><?php echo htmlspecialchars($item['description']); ?></p>
             <p><strong>Current Price:</strong> $<?php echo $item['current_price']; ?></p>
-            <a href="../features/delete_item.php?id=<?php echo $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+            <a href="<?php echo appUrl('delete_item.php?id=' . urlencode((string) $item['id'])); ?>" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
         </div>
     <?php endwhile; ?>
 <?php else: ?>

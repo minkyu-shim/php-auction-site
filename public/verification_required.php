@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/../includes/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -69,8 +70,8 @@ session_start();
         <h1>Email Verification Required</h1>
         <p>Your email address has not been verified yet. Please check your inbox for a verification email and click the link to verify your account.</p>
         <p>You need to verify your email before you can place bids or upload items.</p>
-        <a href="resend_verification.php" class="btn">Resend Verification Email</a>
-        <a href="index.php" class="btn btn-secondary">Back to Homepage</a>
+        <a href="<?php echo appUrl('resend_verification.php'); ?>" class="btn">Resend Verification Email</a>
+        <a href="<?php echo appUrl('index.php'); ?>" class="btn btn-secondary">Back to Homepage</a>
     </div>
 </body>
 </html>

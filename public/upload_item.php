@@ -1,12 +1,11 @@
 <?php
 session_start();
-include '../includes/db.php';
-include '../includes/verification_check.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/verification_check.php';
 
 // Check if the user is logged in, if not send to login.php
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
+    redirectTo('login.php');
 }
 
 // Check if email is verified
@@ -41,8 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $end_time
         );
         mysqli_stmt_execute($stmt);
-        header("Location: index.php");
-        exit;
+        redirectTo('index.php');
     }
 }
 
@@ -52,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
     <title>Upload Item</title>
-    <link rel="stylesheet" href="/public/css/upload_item_style.css">
+    <link rel="stylesheet" href="<?php echo appUrl('css/upload_item_style.css'); ?>">
 </head>
 <body>
 <h1>Upload your Item to Sell</h1>
@@ -79,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </form>
 
 <br><br>
-<p style="color: #333333">Go back to main page <a href="index.php">Click here</a></p>
+<p style="color: #333333">Go back to main page <a href="<?php echo appUrl('index.php'); ?>">Click here</a></p>
 
 </body>
 </html>

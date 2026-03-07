@@ -4,6 +4,8 @@
  * Handles sending verification emails and other email notifications
  */
 
+require_once __DIR__ . '/config.php';
+
 /**
  * Send verification email to new user
  * @param string $email User's email address
@@ -12,10 +14,7 @@
  * @return bool True if email sent successfully
  */
 function sendVerificationEmail($email, $user_name, $verification_token) {
-    // Get the site URL (adjust based on your local setup)
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-    $host = $_SERVER['HTTP_HOST'];
-    $verification_link = $protocol . "://" . $host . "/public/verify_email.php?token=" . $verification_token;
+    $verification_link = appAbsoluteUrl('verify_email.php?token=' . urlencode($verification_token));
 
     // Email subject
     $subject = "Verify your email - Minkyu's Auction Site";
@@ -73,10 +72,21 @@ function sendVerificationEmail($email, $user_name, $verification_token) {
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= "From: noreply@auction-site.com" . "\r\n";
 
-    // Send email using PHP's mail() function
-    // Note: This requires a mail server to be configured on your system
-    // For local development with XAMPP, you may need to configure sendmail or use a library like PHPMailer
-    return mail($email, $subject, $message, $headers);
+    $delivery_mode = getenv('MAIL_DELIVERY') ?: 'mail';
+    $fallback_mode = getenv('MAIL_FALLBACK') ?: 'log';
+
+    if ($delivery_mode === 'log') {
+        return logEmailPreview($email, $subject, $message, $verification_link);
+    }
+
+    $sent = mail($email, $subject, $message, $headers);
+    if ($sent) {
+        return true;
+    }
+
+    return $fallback_mode === 'log'
+        ? logEmailPreview($email, $subject, $message, $verification_link)
+        : false;
 }
 
 /**
@@ -99,4 +109,25 @@ function isTokenValid($token_created_at) {
 
     // Token valid for 24 hours (86400 seconds)
     return $time_difference < 86400;
+}
+
+function logEmailPreview($email, $subject, $message, $verification_link) {
+    $mail_dir = appStoragePath('mail');
+    if (!is_dir($mail_dir) && !mkdir($mail_dir, 0777, true) && !is_dir($mail_dir)) {
+        return false;
+    }
+
+    $safe_recipient = preg_replace('/[^a-z0-9]+/i', '_', strtolower($email));
+    $timestamp = date('Ymd_His');
+    $file_prefix = $timestamp . '_' . trim($safe_recipient, '_');
+
+    $html_path = $mail_dir . '/' . $file_prefix . '.html';
+    $text_path = $mail_dir . '/latest_verification_link.txt';
+
+    $email_preview = "<!-- Subject: {$subject} -->\n" . $message;
+
+    $html_written = file_put_contents($html_path, $email_preview);
+    $text_written = file_put_contents($text_path, $verification_link . PHP_EOL);
+
+    return $html_written !== false && $text_written !== false;
 }

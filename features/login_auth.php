@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../includes/config.php';
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -26,8 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     $_SESSION['user_id'] = $user['user_id'];
                     $_SESSION['user_name'] = $user['user_name'];
                     $_SESSION['email'] = $user['email'];
-                    header("Location: index.php");
-                    exit;
+                    redirectTo('index.php');
                 }
             } else {
                 $error = "Invalid Password";
